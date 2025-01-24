@@ -6,8 +6,10 @@ const filepath = './istqb.json'
 test(`Scrape all ISTQB terms`, async ({ page }) => {
   test.setTimeout(1_600_000)
   const terms = {}
+  await page.addLocatorHandler(page.getByText('I agree'), async () => {
+    await page.getByText('I agree').click()
+  })
   await page.goto('https://glossary.istqb.org/en_US/search')
-  await page.getByText('I agree').click()
   await page.waitForLoadState('domcontentloaded')
   await expect(page.getByText('All terms')).toBeVisible()
   await page.evaluate(async () => {
