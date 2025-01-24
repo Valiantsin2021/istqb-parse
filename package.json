@@ -1,0 +1,54 @@
+{
+  "name": "playwright",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "prepare": "git config core.hooksPath .hooks",
+    "postinstall": "echo \"All dependencies were installed sucessfully ✅ You can now run tests by typing: npm run test\"",
+    "clean": "echo \"❌ Cleaning the reports and downloads folders\" && rimraf ./fixtures/download/* && rimraf ./allure-results/* && rimraf ./fixtures/temp/* && rimraf test-results/* && rimraf report/* && rimraf playwright-report/* && rimraf fixtures/test_data/temp/* && echo \"✅ All reports folders cleaned!\"",
+    "pretest": "npm run clean",
+    "report": "allure generate ./report/allure-results --clean -o ./report/allure-report",
+    "test": "npx playwright test || true",
+    "docker:run": "sh ./scripts/docker_build_and_run.sh",
+    "format": "echo Formatting the code ⌛ && prettier --write ./**/*.js  && echo \"✅ Code formatted, ready to commit!\"",
+    "lint": "echo Linting the code ⌛ && eslint --fix && echo \"✅ Code linted, ready to commit!\"",
+    "docs": "jsdoc -d docs -c jsdoc.config.json"
+  },
+  "commitlint": {
+    "extends": [
+      "@commitlint/config-conventional"
+    ]
+  },
+  "lint-staged": {
+    "**/*.+(cjs|js|ts|tsx)": [
+      "eslint --fix"
+    ],
+    "**/*.+(cjs|js|ts|json)": [
+      "prettier --cache --write",
+      "git add ."
+    ]
+  },
+  "keywords": [],
+  "author": "Valentin Lutchanka",
+  "license": "ISC",
+  "devDependencies": {
+    "@playwright/test": "latest",
+    "@types/node": "latest",
+    "allure-commandline": "latest",
+    "allure-playwright": "latest",
+    "monocart-reporter": "latest",
+    "docdash": "latest",
+    "dotenv": "latest",
+    "eslint": "latest",
+    "eslint-config-prettier": "latest",
+    "eslint-plugin-jsdoc": "latest",
+    "eslint-plugin-playwright": "latest",
+    "eslint-plugin-prettier": "latest",
+    "@commitlint/cli": "latest",
+    "@commitlint/config-conventional": "latest",
+    "prettier": "latest",
+    "rimraf": "3.0.0"
+  }
+}

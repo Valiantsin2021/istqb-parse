@@ -1,0 +1,16 @@
+{
+  "compilerOptions": {
+    "module": "commonJS",
+    "target": "ES2023",
+    "checkJs": true,
+    "resolveJsonModule": true,
+    "baseUrl": ".",
+    "paths": {
+      "@pages/*": ["pages/*"],
+      "@fixtures/*": ["fixtures/*"],
+      "@utils/*": ["utils/*"]
+    }
+  },
+  "include": [".", "projects/setup.js"],
+  "exclude": ["node_modules"]
+}
